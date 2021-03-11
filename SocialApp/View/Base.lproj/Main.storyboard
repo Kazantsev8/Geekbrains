@@ -200,8 +200,6 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="fAB-7I-rLi" kind="relationship" relationship="viewControllers" destinationCreationSelector="toFriendsNavigationController" id="lfg-RC-EYf"/>
-                        <segue destination="Xi7-fd-9SM" kind="relationship" relationship="viewControllers" destinationCreationSelector="toGroupsNavigationController" id="bhO-1C-pns"/>
                         <segue destination="Jci-Wr-oUb" kind="relationship" relationship="viewControllers" id="RpC-cp-MAh"/>
                     </connections>
                 </tabBarController>
@@ -215,7 +213,7 @@
                 <navigationController id="fAB-7I-rLi" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Friends" image="person.fill" catalog="system" id="cJC-LF-bE6"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ORo-3e-pjg">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -232,7 +230,7 @@
                 <navigationController id="Xi7-fd-9SM" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Groups" image="person.3.fill" catalog="system" id="AAk-Ad-shh"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="nLD-Me-BcG">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -392,7 +390,7 @@
             <objects>
                 <tableViewController id="rJp-Ja-F1a" customClass="UserGroupListTableViewController" customModule="SocialApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="cEY-G9-jwc">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
@@ -455,7 +453,7 @@
             <objects>
                 <tableViewController id="mzU-hD-wZl" customClass="GeneralGroupListTableViewController" customModule="SocialApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Wm7-n4-qLZ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
@@ -509,12 +507,12 @@
             </objects>
             <point key="canvasLocation" x="3663.7681159420295" y="468.75"/>
         </scene>
-        <!--User Friend List Table View Controller-->
+        <!--Table View Controller-->
         <scene sceneID="Urx-eN-byb">
             <objects>
-                <tableViewController id="Guw-V9-4Rv" customClass="UserFriendListTableViewController" customModule="SocialApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="Guw-V9-4Rv" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="I4u-Yl-jzI">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
@@ -577,7 +575,7 @@
             <objects>
                 <collectionViewController id="Bns-co-gio" customClass="UserProfileCollectionViewController" customModule="SocialApp" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="saB-Mt-RqF">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="mcs-fv-etp">

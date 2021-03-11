@@ -34,7 +34,7 @@ class NetworkManager {
             URLQueryItem(name: "redirect_uri", value: "https://oauth.vk.com/blank.html"),
             URLQueryItem(name: "scope", value: "notify, friends, photos, audio, video, stories, pages, status, notes, wall, adds, offline, docs, groups, notification, stats, email"),
             URLQueryItem(name: "response_type", value: "token"),
-            URLQueryItem(name: "v", value: "5.68")
+            URLQueryItem(name: "v", value: "5.103")
         ]
     
         return URLRequest(url: urlComponents.url!)
@@ -50,7 +50,7 @@ class NetworkManager {
             "order" : "name",
             "fields" : "photo_200, is_friend",
             "access_token" : token,
-            "v" : "5.68"
+            "v" : "5.103"
         ]
         parameters.forEach { (k,v) in parameters[k] = v }
         let url = baseUrl.self + path
@@ -64,7 +64,7 @@ class NetworkManager {
         }
     }
     
-    func loadNews() {
+    func loadNews(startTime: Double? = nil, startFrom: String? = nil, completion: @escaping (_ news: [News],_ users: [User],_ groups: [Group],_ nextFrom: String) -> Void) {
         let path = "/method/newsfeed.get"
         guard let userId = AppSession.instance.userId else { preconditionFailure("Empty user_id") }
         guard let token = AppSession.instance.token else { preconditionFailure("Empty access_token") }
@@ -85,7 +85,7 @@ class NetworkManager {
                 let newsDispatchGroup = DispatchGroup()
                 var news = [News]()
                 var groups = [Group]()
-                var profiles = [User]()
+                var users = [User]()
                 var nextFrom: String = ""
                 let json = JSON(value)
                 DispatchQueue.global().async(group: newsDispatchGroup){
@@ -98,19 +98,17 @@ class NetworkManager {
                 }
                 DispatchQueue.global().async(group: newsDispatchGroup) {
                     let profilesJSONs = json["response"]["profiles"].arrayValue
-                    profiles = profilesJSONs.map {User($0)}
+                    users = profilesJSONs.map {User($0)}
                 }
                 DispatchQueue.global().async {
                     nextFrom = json["response"]["next_from"].stringValue
                 }
                 newsDispatchGroup.notify(queue: .main){
-                    let result = Alamofire.AFResult<(news: [News], users: [User], groups: [Group], nextFrom: String)>.success((news, profiles, groups, nextFrom))
-                    print(result)
+                    completion(news, users, groups, nextFrom)
                 }
             case .failure(let error):
                 print(error)
-                let result = Alamofire.AFResult<(news: [News], users: [User], groups: [Group], nextFrom: String)>.failure(error)
-                print(result)
+                
             }
         }
         }
@@ -123,7 +121,7 @@ class NetworkManager {
         var params: Parameters = [
             "access_token" : token,
             "extended" : 1,
-            "v" : "5.101"
+            "v" : "5.103"
         ]
         if let owner_id = owner_id {
             params.merge (["owner_id": String(owner_id)]) { (current, _) in current }
@@ -132,7 +130,7 @@ class NetworkManager {
             let owner_id = owner_id {
             params.merge (["videos": String(owner_id)+"_"+String(id)]) { (current, _) in current }
         }
-        NetworkManager.session.request(self.baseUrl + path, method: .get, parameters: params).responseJSON(queue: DispatchQueue.global()) { response in
+        AF.request(self.baseUrl + path, method: .get, parameters: params).responseJSON(queue: DispatchQueue.global()) { response in
             switch response.result {
             case .success(let value) :
                 let json = JSON(value)
@@ -147,5 +145,66 @@ class NetworkManager {
             }
         }
     }
+    
+    func loadGroups(searchText:String, completion: @escaping ([Group]) -> Void){
+        let path = "/method/groups.search"
+        guard let token = AppSession.instance.token else {preconditionFailure("Empty token!")}
+        let params: Parameters = [
+            "access_token": token,
+            "extended": 1,
+            "q" : searchText,
+            "sort" : 3,
+            "v": "5.103"
+        ]
+        AF.request(self.baseUrl + path, method: .get, parameters: params).responseJSON(queue: DispatchQueue.global()) { response in
+            switch response.result {
+            case .success(let value):
+                var groups = [Group]()
+                let json = JSON(value)
+                let groupsJSONs = json["response"]["items"].arrayValue
+                groups = groupsJSONs.map {Group($0)}
+                DispatchQueue.main.async {
+                    completion(groups)
+                }
+            case .failure(let err):
+                print(err)
+                completion([])
+            }
+        }
+    }
+    
+    func loadPhotos(userId: Int, offset: Int = 0, completion: @escaping ([Photo]) -> Void){
+        let path = "/method/photos.getAll"
+        guard let token = AppSession.instance.token else {preconditionFailure("Empty token!")}
+        let params: Parameters = [
+            "access_token" : token,
+            "scope" : "photos",
+            "owner_id" : userId,
+            "extended" : 1,
+            "offset" : offset,
+            "count" : 200,
+            "photo_sizes" : 0,
+            "no_service_albums" : 0,
+            "need_hidden" : 0,
+            "skip_hidden" : 1,
+            "v": "5.101"
+        ]
+        AF.request(self.baseUrl + path, method: .get, parameters: params).responseJSON(queue: DispatchQueue.global()) { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                var photos = [Photo]()
+                let photosJSONs = json["response"]["items"].arrayValue
+                photos = photosJSONs.map {Photo($0)}
+                DispatchQueue.main.async {
+                    completion(photos)
+                }
+            case .failure(let err):
+                print(err)
+                completion([])
+            }
+        }
+    }
+    
     
 }

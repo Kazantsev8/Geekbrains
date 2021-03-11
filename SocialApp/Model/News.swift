@@ -69,7 +69,7 @@ class News: Object {
             let dispatchGroup = DispatchGroup()
             DispatchQueue.global().async(group: dispatchGroup){
                 videoAttachmentsJSONs.forEach { videoJSON in
-                    networkManager.getVideo(owner_id: videoJSON["video"]["owner_id"].intValue, id: videoJSON["video"]["id"].intValue, completion: { video in
+                    networkManager.loadVideo(owner_id: videoJSON["video"]["owner_id"].intValue, id: videoJSON["video"]["id"].intValue, completion: { video in
                         guard let video = video.first else { return }
                         videoAttachments.append(video)
                     })

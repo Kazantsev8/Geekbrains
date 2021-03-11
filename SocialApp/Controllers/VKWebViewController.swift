@@ -51,8 +51,7 @@ extension VKWebViewController: WKNavigationDelegate {
         print("User ID: \(AppSession.instance.userId ?? "Failed")")
         
         decisionHandler(.cancel)
-        NetworkManager.shared.loadFriends()
-        NetworkManager.shared.loadNews()
+        
         if AppSession.instance.token != nil {
         performSegue(withIdentifier: "toTabBarController", sender: AnyObject.self)
         } else {

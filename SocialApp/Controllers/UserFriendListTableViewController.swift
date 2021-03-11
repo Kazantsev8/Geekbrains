@@ -25,23 +25,19 @@ class UserFriendListTableViewController: UITableViewController {
 //
 //    private let searchController = UISearchController()
 //    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        
+    override func viewDidLoad() {
+        super.viewDidLoad()
 //        searchController.searchResultsUpdater = self
 //        searchController.obscuresBackgroundDuringPresentation = false
 //        searchController.searchBar.placeholder = "Find friend"
 //        definesPresentationContext = true
 //        navigationItem.searchController = searchController
-//        
-//    }
+        
+    }
 //
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        if isFiltering {
-//            return filteredFriends.count
-//        }
-//        return groupedFriends.count
-//    }
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
 //
 //    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 //        if isFiltering {
@@ -53,12 +49,9 @@ class UserFriendListTableViewController: UITableViewController {
 //        }
 //    }
 //    
-//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if isFiltering {
-//            return filteredFriends[section].count
-//        }
-//        return groupedFriends[section].count
-//    }
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
 //    
 //    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
 //        return lastNamefirstCharacters
@@ -75,7 +68,7 @@ class UserFriendListTableViewController: UITableViewController {
 //        var friendImage: UIImage = .remove
 //        var friendFirstName = String()
 //        var completedFriendsArray = [[String]]()
-//        
+//
 //        if isFiltering {
 //            completedFriendsArray = filteredFriends
 //        } else {
@@ -88,9 +81,10 @@ class UserFriendListTableViewController: UITableViewController {
 //                friendFirstName = friends[index].firstName
 //            }
 //        }
-//        
+//
 //        cell.friendAvatarImage?.image = friendImage
 //        cell.friendNameLabel?.text = ("\(friendLastName)" + " " + "\(friendFirstName)")
+            
 //        return cell
 //    }
 //    
