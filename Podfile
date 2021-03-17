@@ -7,8 +7,10 @@ target 'SocialApp' do
 
   # Pods for SocialApp
 
-pod 'Alamofire', '~> 5.2'
+pod 'Alamofire', '~> 4.0'
 pod 'SwiftyJSON', '~> 4.0'
 pod 'RealmSwift'
+pod 'PromiseKit', '~> 6.8'
+pod 'PromiseKit/Alamofire', '~> 6.0'
 
 end

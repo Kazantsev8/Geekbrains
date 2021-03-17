@@ -8,14 +8,14 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
-
+import PromiseKit
 
 class NetworkManager {
     
     //MARK: BASE PARAMETERS
     let baseUrl = "https://api.vk.com"
     static let shared = NetworkManager()
-    static let session: Session = {
+    static let session: URLSession = {
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = 30
         config.waitsForConnectivity = true
@@ -41,30 +41,30 @@ class NetworkManager {
     }
     
     //MARK: GETTING FRIENDS FROM VK API BY USER_ID AND ACCESS_TOKEN
-    func loadFriends() {
-        let path = "/method/friends.get"
-        guard let userId = AppSession.instance.userId else { preconditionFailure("Empty user_id") }
-        guard let token = AppSession.instance.token else { preconditionFailure("Empty access_token") }
-        var parameters: Parameters = [
-            "user_ids" : userId,
-            "order" : "name",
-            "fields" : "photo_200, is_friend",
-            "access_token" : token,
-            "v" : "5.103"
-        ]
-        parameters.forEach { (k,v) in parameters[k] = v }
-        let url = baseUrl.self + path
-        DispatchQueue.global().async {
-            AF.request(url, parameters: parameters).responseData { response in
-                guard let data = response.value else { return }
-                let json = JSON(data)
-                let usersJSONs = json["response"]["items"].arrayValue
-                print(usersJSONs)
-            }
-        }
-    }
+//    func loadFriends() {
+//        let path = "/method/friends.get"
+//        guard let userId = AppSession.instance.userId else { preconditionFailure("Empty user_id") }
+//        guard let token = AppSession.instance.token else { preconditionFailure("Empty access_token") }
+//        var parameters: Parameters = [
+//            "user_ids" : userId,
+//            "order" : "name",
+//            "fields" : "photo_200, is_friend",
+//            "access_token" : token,
+//            "v" : "5.103"
+//        ]
+//        parameters.forEach { (k,v) in parameters[k] = v }
+//        let url = baseUrl.self + path
+//        DispatchQueue.global().async {
+//            AF.request(url, parameters: parameters).responseData { response in
+//                guard let data = response.value else { return }
+//                let json = JSON(data)
+//                let usersJSONs = json["response"]["items"].arrayValue
+//                print(usersJSONs)
+//            }
+//        }
+//    }
     
-    func loadNews(startTime: Double? = nil, startFrom: String? = nil, completion: @escaping (_ news: [News],_ users: [User],_ groups: [Group],_ nextFrom: String) -> Void) {
+    func loadNews(startTime: Double? = nil, startFrom: String? = nil) -> Promise<([News],[Group],[User], String)> {
         let path = "/method/newsfeed.get"
         guard let userId = AppSession.instance.userId else { preconditionFailure("Empty user_id") }
         guard let token = AppSession.instance.token else { preconditionFailure("Empty access_token") }
@@ -76,42 +76,30 @@ class NetworkManager {
             "access_token" : token,
             "v" : "5.103"
         ]
+        
         parameters.forEach { (k,v) in parameters[k] = v }
         let url = baseUrl.self + path
-        DispatchQueue.global().async {
-        AF.request(url, parameters: parameters).responseData { response in
-            switch response.result {
-            case .success(let value):
-                let newsDispatchGroup = DispatchGroup()
-                var news = [News]()
-                var groups = [Group]()
-                var users = [User]()
-                var nextFrom: String = ""
-                let json = JSON(value)
-                DispatchQueue.global().async(group: newsDispatchGroup){
+        
+        return Alamofire.request(url,
+                          method: .get,
+                          parameters: parameters)
+                 .responseJSON()
+                 .map(on: .global()) { (json, response) in
+                    var news = [News]()
+                    var groups = [Group]()
+                    var users = [User]()
+                    var nextFrom: String = ""
+                    let json = JSON(json)
                     let newsJSONs = json["response"]["items"].arrayValue
                     news = newsJSONs.map {News($0)}
-                }
-                DispatchQueue.global().async(group: newsDispatchGroup){
                     let groupsJSONs = json["response"]["groups"].arrayValue
                     groups = groupsJSONs.map {Group($0)}
-                }
-                DispatchQueue.global().async(group: newsDispatchGroup) {
                     let profilesJSONs = json["response"]["profiles"].arrayValue
                     users = profilesJSONs.map {User($0)}
-                }
-                DispatchQueue.global().async {
                     nextFrom = json["response"]["next_from"].stringValue
-                }
-                newsDispatchGroup.notify(queue: .main){
-                    completion(news, users, groups, nextFrom)
-                }
-            case .failure(let error):
-                print(error)
                 
+                return (news, groups, users, nextFrom)
             }
-        }
-        }
     }
     
     func loadVideo(owner_id: Int? = nil, id: Int? = nil, completion: @escaping ([Video]) -> Void){
@@ -130,7 +118,7 @@ class NetworkManager {
             let owner_id = owner_id {
             params.merge (["videos": String(owner_id)+"_"+String(id)]) { (current, _) in current }
         }
-        AF.request(self.baseUrl + path, method: .get, parameters: params).responseJSON(queue: DispatchQueue.global()) { response in
+        Alamofire.request(self.baseUrl + path, method: .get, parameters: params).responseJSON(queue: DispatchQueue.global()) { response in
             switch response.result {
             case .success(let value) :
                 let json = JSON(value)
@@ -156,7 +144,7 @@ class NetworkManager {
             "sort" : 3,
             "v": "5.103"
         ]
-        AF.request(self.baseUrl + path, method: .get, parameters: params).responseJSON(queue: DispatchQueue.global()) { response in
+        Alamofire.request(self.baseUrl + path, method: .get, parameters: params).responseJSON(queue: DispatchQueue.global()) { response in
             switch response.result {
             case .success(let value):
                 var groups = [Group]()
@@ -189,7 +177,7 @@ class NetworkManager {
             "skip_hidden" : 1,
             "v": "5.101"
         ]
-        AF.request(self.baseUrl + path, method: .get, parameters: params).responseJSON(queue: DispatchQueue.global()) { response in
+        Alamofire.request(self.baseUrl + path, method: .get, parameters: params).responseJSON(queue: DispatchQueue.global()) { response in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
@@ -208,3 +196,4 @@ class NetworkManager {
     
     
 }
+
