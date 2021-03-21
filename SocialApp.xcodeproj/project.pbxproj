@@ -38,6 +38,7 @@
 		2CB946F625B71B3D00D09139 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB946F525B71B3D00D09139 /* User.swift */; };
 		2CB946F925B71C5500D09139 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB946F825B71C5500D09139 /* Group.swift */; };
 		2CB946FF25B8366500D09139 /* UserProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB946FE25B8366500D09139 /* UserProfileCell.swift */; };
+		2CCEB9BB26047B63006C19BD /* PhotoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCEB9BA26047B63006C19BD /* PhotoManager.swift */; };
 		2CD5F31E25BD956800CF499F /* Like.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD5F31D25BD956800CF499F /* Like.swift */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +75,7 @@
 		2CB946F525B71B3D00D09139 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		2CB946F825B71C5500D09139 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		2CB946FE25B8366500D09139 /* UserProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileCell.swift; sourceTree = "<group>"; };
+		2CCEB9BA26047B63006C19BD /* PhotoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoManager.swift; sourceTree = "<group>"; };
 		2CD5F31D25BD956800CF499F /* Like.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Like.swift; sourceTree = "<group>"; };
 		6120428444594A2FAEBEFACC /* Pods-SocialApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialApp.debug.xcconfig"; path = "Target Support Files/Pods-SocialApp/Pods-SocialApp.debug.xcconfig"; sourceTree = "<group>"; };
 		71F2058AB50640E29B734C65 /* Pods-SocialApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialApp.release.xcconfig"; path = "Target Support Files/Pods-SocialApp/Pods-SocialApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				2C7C117825E8E1800071B46C /* NetworkManager.swift */,
+				2CCEB9BA26047B63006C19BD /* PhotoManager.swift */,
 				2C7C11CB25EE4D760071B46C /* RealmManager.swift */,
 			);
 			path = Service;
@@ -363,6 +366,7 @@
 				2C7C0D0C25D2490B0099EF0E /* News.swift in Sources */,
 				2C7C11BD25EE27F30071B46C /* UIExtensions.swift in Sources */,
 				2C7C117625E8DCE70071B46C /* VKWebViewController.swift in Sources */,
+				2CCEB9BB26047B63006C19BD /* PhotoManager.swift in Sources */,
 				2CB946F625B71B3D00D09139 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
