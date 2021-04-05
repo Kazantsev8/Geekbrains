@@ -14,7 +14,7 @@ class RealmManager {
     static func save <T: Object>(items: [T],
         configuration: Realm.Configuration = deleteIfMigration,
         update: Realm.UpdatePolicy = .modified) throws {
-        let realm = try! Realm()
+        let realm = try! Realm(configuration: configuration)
         print(configuration.fileURL ?? "")
         try realm.write {
             realm.add(items, update: update)

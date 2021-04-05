@@ -27,6 +27,7 @@ class User: Object {
             self.lastName = json["last_name"].stringValue
             self.is_friend = json["is_friend"].intValue
             self.groups.append(objectsIn: groups)
+            self.images.append(objectsIn: images)
         }
     
     override static func primaryKey() -> String? {

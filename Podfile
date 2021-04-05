@@ -12,5 +12,6 @@ pod 'SwiftyJSON', '~> 4.0'
 pod 'RealmSwift'
 pod 'PromiseKit', '~> 6.8'
 pod 'PromiseKit/Alamofire', '~> 6.0'
+pod 'Kingfisher', '= 5.7.1'
 
 end

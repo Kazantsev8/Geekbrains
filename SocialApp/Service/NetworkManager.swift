@@ -15,11 +15,11 @@ class NetworkManager {
     //MARK: BASE PARAMETERS
     let baseUrl = "https://api.vk.com"
     static let shared = NetworkManager()
-    static let session: URLSession = {
+    static let session: SessionManager = {
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = 30
         config.waitsForConnectivity = true
-        let session = Session(configuration: config)
+        let session = SessionManager(configuration: config)
         return session
     }()
     
@@ -40,30 +40,39 @@ class NetworkManager {
         return URLRequest(url: urlComponents.url!)
     }
     
-    //MARK: GETTING FRIENDS FROM VK API BY USER_ID AND ACCESS_TOKEN
-//    func loadFriends() {
-//        let path = "/method/friends.get"
-//        guard let userId = AppSession.instance.userId else { preconditionFailure("Empty user_id") }
-//        guard let token = AppSession.instance.token else { preconditionFailure("Empty access_token") }
-//        var parameters: Parameters = [
-//            "user_ids" : userId,
-//            "order" : "name",
-//            "fields" : "photo_200, is_friend",
-//            "access_token" : token,
-//            "v" : "5.103"
-//        ]
-//        parameters.forEach { (k,v) in parameters[k] = v }
-//        let url = baseUrl.self + path
-//        DispatchQueue.global().async {
-//            AF.request(url, parameters: parameters).responseData { response in
-//                guard let data = response.value else { return }
-//                let json = JSON(data)
-//                let usersJSONs = json["response"]["items"].arrayValue
-//                print(usersJSONs)
-//            }
-//        }
-//    }
     
+    //MARK: COMPLETED
+    func friendsGet() -> Promise<[User]> {
+        let path = "/method/friends.get"
+        guard let userId = AppSession.instance.userId else { preconditionFailure("Empty user_id") }
+        guard let token = AppSession.instance.token else { preconditionFailure("Empty access_token") }
+        var parameters: Parameters = [
+            "user_ids" : userId,
+            "order" : "name",
+            "fields" : "photo_200, is_friend",
+            "access_token" : token,
+            "v" : "5.103"
+        ]
+        parameters.forEach { (k,v) in parameters[k] = v }
+        let url = baseUrl.self + path
+        
+        return Alamofire.request(url, method: .get, parameters: parameters)
+            .responseJSON()
+            .map(on: .global()) { json, response -> [User] in
+                let json = JSON(json)
+                
+                if let errorMessage = json["error"]["error_msg"].string {
+                    let error = NetworkError.error(message: errorMessage)
+                    throw error
+                }
+                
+                let usersJSONs = json["response"]["items"].arrayValue
+                return usersJSONs.map {User($0)}
+            }
+        
+    }
+            
+    //MARK: COMPLETED
     func loadNews(startTime: Double? = nil, startFrom: String? = nil) -> Promise<([News],[Group],[User], String)> {
         let path = "/method/newsfeed.get"
         guard let userId = AppSession.instance.userId else { preconditionFailure("Empty user_id") }
