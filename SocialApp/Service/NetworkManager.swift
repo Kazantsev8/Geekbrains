@@ -73,7 +73,7 @@ class NetworkManager {
     }
             
     //MARK: COMPLETED
-    func loadNews(startTime: Double? = nil, startFrom: String? = nil) -> Promise<([News],[Group],[User], String)> {
+    func newsFeedGet(startTime: Double? = nil, startFrom: String? = nil) -> Promise<([News],[Group],[User], String)> {
         let path = "/method/newsfeed.get"
         guard let userId = AppSession.instance.userId else { preconditionFailure("Empty user_id") }
         guard let token = AppSession.instance.token else { preconditionFailure("Empty access_token") }

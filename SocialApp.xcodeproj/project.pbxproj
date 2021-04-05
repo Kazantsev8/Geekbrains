@@ -103,9 +103,9 @@
 			children = (
 				2C8CEF7B25AD5A530038E186 /* LogInViewController.swift */,
 				2CCEB9E826105D4E006C19BD /* FriendsListViewController.swift */,
+				2C7C0D0225D114100099EF0E /* NewsTableViewController.swift */,
 				2C7C117525E8DCE70071B46C /* VKWebViewController.swift */,
 				2C68082025B3FC94006CF898 /* UserProfileCollectionViewController.swift */,
-				2C7C0D0225D114100099EF0E /* NewsTableViewController.swift */,
 				2C68081625B3FB54006CF898 /* UserGroupListTableViewController.swift */,
 				2C68081A25B3FBAD006CF898 /* GeneralGroupListTableViewController.swift */,
 			);
