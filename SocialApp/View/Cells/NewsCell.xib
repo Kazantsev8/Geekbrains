@@ -9,10 +9,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewsCell" rowHeight="219" id="ArK-y4-aXD" customClass="NewsCell" customModule="SocialApp" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="219" id="ArK-y4-aXD" customClass="NewsCell" customModule="SocialApp" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="403" height="366"/>
-            <autoresizingMask key="autoresizingMask"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ArK-y4-aXD" id="FYK-su-v0l">
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ArK-y4-aXD" id="FYK-su-v0l">
                 <rect key="frame" x="0.0" y="0.0" width="403" height="366"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
@@ -38,7 +38,7 @@
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8YY-j0-hxA">
-                        <rect key="frame" x="10" y="263.5" width="383" height="57.5"/>
+                        <rect key="frame" x="0.0" y="258.5" width="403" height="72.5"/>
                     </stackView>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="X0X-rS-dNs">
                         <rect key="frame" x="10" y="331" width="250" height="30"/>
@@ -147,7 +147,7 @@
                 <constraints>
                     <constraint firstItem="irn-36-XOt" firstAttribute="centerY" secondItem="BEj-Uc-Dk6" secondAttribute="centerY" id="0QZ-cZ-ut9"/>
                     <constraint firstItem="LxV-Fb-S8S" firstAttribute="centerY" secondItem="ior-VQ-XGl" secondAttribute="centerY" id="4ox-vD-08e"/>
-                    <constraint firstAttribute="trailing" secondItem="8YY-j0-hxA" secondAttribute="trailing" constant="10" id="9ut-we-6jj"/>
+                    <constraint firstAttribute="trailing" secondItem="8YY-j0-hxA" secondAttribute="trailing" id="9ut-we-6jj"/>
                     <constraint firstAttribute="trailing" secondItem="ior-VQ-XGl" secondAttribute="trailing" constant="10" id="AdX-6l-oRw"/>
                     <constraint firstItem="X0X-rS-dNs" firstAttribute="leading" secondItem="FYK-su-v0l" secondAttribute="leading" constant="10" id="CSk-F6-DFk"/>
                     <constraint firstItem="AJg-i6-TLx" firstAttribute="centerX" secondItem="FYK-su-v0l" secondAttribute="centerX" id="DS8-vn-Qvt"/>
@@ -157,13 +157,13 @@
                     <constraint firstItem="BEj-Uc-Dk6" firstAttribute="top" secondItem="FYK-su-v0l" secondAttribute="top" constant="10" id="MFP-SN-QBV"/>
                     <constraint firstAttribute="trailing" secondItem="AJg-i6-TLx" secondAttribute="trailing" constant="10" id="QA6-Bt-oHQ"/>
                     <constraint firstItem="BEj-Uc-Dk6" firstAttribute="leading" secondItem="FYK-su-v0l" secondAttribute="leading" constant="10" id="WXd-zY-rkH"/>
-                    <constraint firstItem="8YY-j0-hxA" firstAttribute="top" secondItem="AJg-i6-TLx" secondAttribute="bottom" constant="5" id="XPA-b9-JfM"/>
+                    <constraint firstItem="8YY-j0-hxA" firstAttribute="top" secondItem="AJg-i6-TLx" secondAttribute="bottom" id="XPA-b9-JfM"/>
                     <constraint firstItem="AJg-i6-TLx" firstAttribute="leading" secondItem="FYK-su-v0l" secondAttribute="leading" constant="10" id="d9r-AI-bIv"/>
                     <constraint firstAttribute="bottom" secondItem="ior-VQ-XGl" secondAttribute="bottom" constant="5" id="dOy-QY-hS9"/>
                     <constraint firstItem="AJg-i6-TLx" firstAttribute="top" secondItem="BEj-Uc-Dk6" secondAttribute="bottom" constant="5" id="ean-ee-9ou"/>
                     <constraint firstItem="ior-VQ-XGl" firstAttribute="leading" secondItem="LxV-Fb-S8S" secondAttribute="trailing" constant="5" id="eud-q3-C3P"/>
-                    <constraint firstItem="X0X-rS-dNs" firstAttribute="top" secondItem="8YY-j0-hxA" secondAttribute="bottom" constant="10" id="iE2-sG-Cew"/>
-                    <constraint firstItem="8YY-j0-hxA" firstAttribute="leading" secondItem="FYK-su-v0l" secondAttribute="leading" constant="10" id="uuk-qU-tuN"/>
+                    <constraint firstItem="X0X-rS-dNs" firstAttribute="top" secondItem="8YY-j0-hxA" secondAttribute="bottom" id="iE2-sG-Cew"/>
+                    <constraint firstItem="8YY-j0-hxA" firstAttribute="leading" secondItem="FYK-su-v0l" secondAttribute="leading" id="uuk-qU-tuN"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

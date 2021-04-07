@@ -192,7 +192,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="s6I-68-buo">
             <objects>
-                <tabBarController id="NNB-q6-egf" sceneMemberID="viewController">
+                <tabBarController modalPresentationStyle="fullScreen" id="NNB-q6-egf" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="FLA-cP-JtC"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="yXx-Gg-Rjz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -296,7 +296,7 @@
         <!--Item-->
         <scene sceneID="REG-Hn-W4Q">
             <objects>
-                <navigationController id="Jci-Wr-oUb" sceneMemberID="viewController">
+                <navigationController modalPresentationStyle="fullScreen" id="Jci-Wr-oUb" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="j8u-L6-ART"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="D6z-t4-7gG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
@@ -313,9 +313,9 @@
         <!--News-->
         <scene sceneID="HBd-PA-f5j">
             <objects>
-                <tableViewController id="cKO-yz-JgU" customClass="NewsTableViewController" customModule="SocialApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController modalPresentationStyle="fullScreen" id="cKO-yz-JgU" customClass="NewsTableViewController" customModule="SocialApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Xg3-u8-CEI">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <connections>
@@ -325,6 +325,8 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="News" badgeValue="New" selectedImage="doc.richtext" catalog="system" id="NiA-td-Sm5"/>
                     <navigationItem key="navigationItem" id="uXd-TK-on5"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u1V-7h-oId" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
